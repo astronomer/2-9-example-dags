@@ -40,9 +40,7 @@ with open("include/ingestion_source_config.json", "r") as f:
         Dataset(source["dataset_uri"]) for source in config["sources"]
     ]
 
-    # convert list to tuple
     ingestion_datasets = tuple(ingestion_datasets)
-    # add | between all entries in the tuple
 
 
 SNOWFLAKE_CONN_ID = "snowflake_de_team"
