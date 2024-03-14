@@ -34,7 +34,7 @@ SNOWFLAKE_CONN_ID = "snowflake_de_team"
         "Airflow params (manual run)",
         "Setup/Teardown",
         "DatasetOrTimeSchedule",
-        "use-case",
+        "use-case"
     ],
     default_args={"owner": "Cerberus", "retries": 3, "retry_delay": 5},
     description="Load data from S3 to Snowflake",
