@@ -15,7 +15,7 @@ import requests
     schedule=None,
     catchup=False,
     doc_md=__doc__,
-    tags=["dynamic task mapping", "2-9", "toy"],
+    tags=["Dynamic Task Mapping", "2-9", "toy"],
 )
 def toy_custom_names_dynamic_tasks_taskflow():
     @task
@@ -24,7 +24,7 @@ def toy_custom_names_dynamic_tasks_taskflow():
         r = requests.get(f"https://www.fruityvice.com/api/fruit/all").json()
         return r
 
-    @task(map_index_template="""{{ my_mapping_variable }}""")
+    @task(map_index_template="{{ my_mapping_variable }}")
     def map_fruits(fruit_info: dict):
         from airflow.operators.python import get_current_context
 

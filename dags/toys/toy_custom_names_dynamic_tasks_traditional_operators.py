@@ -17,7 +17,7 @@ import requests
     schedule=None,
     catchup=False,
     doc_md=__doc__,
-    tags=["dynamic task mapping", "2-9", "toy"],
+    tags=["Dynamic Task Mapping", "2-9", "toy"],
 )
 def toy_custom_names_dynamic_tasks_traditional_operators():
     @task

@@ -15,7 +15,7 @@ from pendulum import datetime
     ),  # Use () instead of [] to be able to use conditional dataset scheduling!
     catchup=False,
     doc_md=__doc__,
-    tags=["Dataset", "2-9", "toy", "toy conditional dataset scheduling"],
+    tags=["Dataset", "2-9", "toy", "Conditional Dataset Scheduling"],
 )
 def downstream2_one_in_each_group():
     @task

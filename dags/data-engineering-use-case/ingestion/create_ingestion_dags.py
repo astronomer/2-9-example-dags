@@ -62,7 +62,7 @@ def create_ingest_dags(
         ) -> PokeReturnValue:
             """Wait for a new file to arrive in the source satisfying given criteria."""
             path = ObjectStoragePath(
-                f"{base_path}{source_name}", conn_id=conn_id_ingest
+                f"{base_path}/{source_name}", conn_id=conn_id_ingest
             )
 
             files = [f for f in path.iterdir() if f.is_file()]

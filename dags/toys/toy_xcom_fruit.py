@@ -14,6 +14,7 @@ import requests
 
 @dag(
     start_date=None,
+    dag_display_name="Query Fruityvice API for fruit info (Früchte DAG)",
     schedule=None,
     catchup=False,
     params={

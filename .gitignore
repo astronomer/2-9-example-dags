@@ -10,3 +10,5 @@ webserver_config.py
 airflow.cfg
 airflow.db
 include/.DS_Store
+dags/learn_updates
+include/key.json
