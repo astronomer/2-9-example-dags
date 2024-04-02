@@ -24,6 +24,7 @@ SNOWFLAKE_CONN_ID = "snowflake_de_team"
     start_date=datetime(2024, 1, 1),
     schedule=[Dataset("snowflake://customer_feedback_table")],
     catchup=False,
+    max_consecutive_failed_dag_runs=5,
     tags=["ML", "CS", "Dynamic Task Group Mapping", "DAG Docs", "use-case"],
     default_args={"owner": "Pakkun", "retries": 3, "retry_delay": 5},
     description="Analyze customer feedback",
@@ -63,7 +64,9 @@ def analyze_customer_feedback():
             print(result)
             return result
 
-        @task
+        @task(
+            multiple_outputs=True,
+        )
         def create_embeddings(comment):
             from sys import getsizeof
             from transformers import pipeline
@@ -77,7 +80,7 @@ def analyze_customer_feedback():
             print(f"Size of comment: {getsizeof(comment.encode('utf-8'))} bytes")
             print(f"Size of embeddings: {deep_getsizeof(embeddings, set())} bytes")
 
-            return embeddings
+            return {"embeddings": embeddings, "comment": comment}
 
         processed_feedback = process_feedback(feedback)
 
