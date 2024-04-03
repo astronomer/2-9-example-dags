@@ -5,9 +5,6 @@ Use this DAG to showcase the new task duration page in the UI.
 """
 
 from airflow.decorators import dag, task
-from pendulum import datetime
-from airflow.models.param import Param
-from airflow.models.baseoperator import chain
 import time
 import random
 
@@ -19,7 +16,7 @@ random.seed(42)
     schedule=None,
     catchup=False,
     doc_md=__doc__,
-    tags=["UI", "2-9", "toy"],
+    tags=["UI", "toy"],
 )
 def toy_task_duration_page():
 

@@ -34,10 +34,13 @@ slack_notifier_instantiated = SlackNotifier(
     schedule=None,
     catchup=False,
     doc_md=__doc__,
-    tags=["@task.bash", "2-9", "toy"],
+    tags=["@task.bash", "toy"],
 )
 def toy_on_skipped_callback():
 
+    # NEW in Airflow 2.9: on_skipped_callback to fire if an AirflowSkipException is raised
+    # This callback is executed only if an AirflowSkipException gets raised, not if a task is skipped
+    # because of a branching decision or a trigger rule.
     @task(on_skipped_callback=slack_notifier_instantiated)
     def task_that_raises_skip_exception():
         time.sleep(5)

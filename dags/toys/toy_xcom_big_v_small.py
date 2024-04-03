@@ -1,10 +1,8 @@
 """
 ## Toy DAG to show size dependant custom XCom serialization
 
-This DAG pushes two dicts to XCom, one below, one above 1000 bytes. It then pulls them and prints their sizes.
-Use this DAG together with the XComObjectStoreBackend's xcom_objectstorage_threshold
-configuration.
-See: https://airflow.apache.org/docs/apache-airflow-providers-common-io/stable/configurations-ref.html#xcom-objectstorage-threshold
+This DAG pushes two objects to XCom, one below, one above 1000 bytes. 
+It then pulls them and prints their sizes.
 """
 
 from airflow.decorators import dag, task
@@ -16,32 +14,32 @@ from airflow.models.baseoperator import chain
     schedule=None,
     catchup=False,
     doc_md=__doc__,
-    tags=["xcom", "2-9", "toy"],
+    tags=["xcom", "toy"],
 )
-def toy_xcom_big_v_small():
+def toy_xcom_big_vs_small():
     @task
-    def push_dicts(**context) -> None:
+    def push_objects(**context) -> None:
         """Create a small and a big dictionary, print their sizes and push them to XCom."""
 
-        my_small_dict = {"a": 23}
-        my_big_dict = {f"key{i}": "x" * 100 for i in range(100)}
-        print(f"Size of small dictionary: {my_small_dict.__sizeof__()}")
-        print(f"Size of big dictionary: {my_big_dict.__sizeof__()}")
+        small_obj = {"a": 23}
+        big_obj = {f"key{i}": "x" * 100 for i in range(100)}
+        print(f"Size of small object: {small_obj.__sizeof__()}")
+        print(f"Size of big object: {big_obj.__sizeof__()}")
 
-        context["ti"].xcom_push(key="small_dict", value=my_small_dict)
-        context["ti"].xcom_push(key="big_dict", value=my_big_dict)
+        context["ti"].xcom_push(key="small_obj", value=small_obj)
+        context["ti"].xcom_push(key="big_obj", value=big_obj)
 
     @task
-    def pull_dicts(**context) -> None:
+    def pull_objects(**context) -> None:
         """Pull the small and big dictionaries from XCom and print their sizes."""
 
-        small_dict = context["ti"].xcom_pull(task_ids="push_dicts", key="small_dict")
-        big_dict = context["ti"].xcom_pull(task_ids="push_dicts", key="big_dict")
+        small_obj = context["ti"].xcom_pull(task_ids="push_objects", key="small_obj")
+        big_obj = context["ti"].xcom_pull(task_ids="push_objects", key="big_obj")
 
-        print(f"Size of small dictionary: {small_dict.__sizeof__()}")
-        print(f"Size of big dictionary: {big_dict.__sizeof__()}")
+        print(f"Size of small object: {small_obj.__sizeof__()}")
+        print(f"Size of big object: {big_obj.__sizeof__()}")
 
-    chain(push_dicts(), pull_dicts())
+    chain(push_objects(), pull_objects())
 
 
-toy_xcom_big_v_small()
+toy_xcom_big_vs_small()

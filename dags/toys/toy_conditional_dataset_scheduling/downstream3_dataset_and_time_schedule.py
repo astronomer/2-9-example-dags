@@ -19,7 +19,7 @@ from airflow.timetables.trigger import CronTriggerTimetable
     # Use () instead of [] to be able to use conditional dataset scheduling!
     catchup=False,
     doc_md=__doc__,
-    tags=["toy", "Conditional Dataset Scheduling"],
+    tags=["toy", "Conditional Dataset Scheduling", "DatasetOrTimeSchedule"],
 )
 def toy_downstream3_dataset_and_time_schedule():
     @task

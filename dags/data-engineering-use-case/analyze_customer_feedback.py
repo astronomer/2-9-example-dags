@@ -45,19 +45,25 @@ def analyze_customer_feedback():
 
     @task_group
     def get_sentiment(feedback):
-        @task
+        # NEW in Airflow 2.9: Define custom names for the map index
+        @task(map_index_template="{{ my_mapping_variable }}")
         def process_feedback(feedback):
+            from airflow.operators.python import get_current_context
+
+            context = get_current_context()
             comment = feedback["COMMENTS"].translate(
                 str.maketrans("", "", string.punctuation)
             )
-
+            context["my_mapping_variable"] = f"{comment}"
             return comment
 
-        @task(
-            queue="ml-queue",
-        )
+        @task(queue="ml-queue", map_index_template="{{ my_mapping_variable }}")
+        # NEW in Airflow 2.9: Define custom names for the map index
         def analyze_sentiment(processed_text):
+            from airflow.operators.python import get_current_context
             from transformers import pipeline
+
+            context = get_current_context()
 
             sentiment_pipeline = pipeline(
                 "sentiment-analysis",
@@ -65,15 +71,20 @@ def analyze_customer_feedback():
             )
             sentence = processed_text
             result = sentiment_pipeline(sentence)
+            context["my_mapping_variable"] = (
+                f"{sentence} - {result[0]['label']} - {round(result[0]['score'], 3)}"
+            )
             print(result)
             return result
 
-        @task(
-            multiple_outputs=True,
-        )
+        @task(multiple_outputs=True, map_index_template="{{ my_mapping_variable }}")
+        # NEW in Airflow 2.9: Define custom names for the map index
         def create_embeddings(comment):
+            from airflow.operators.python import get_current_context
             from sys import getsizeof
             from transformers import pipeline
+
+            context = get_current_context()
 
             embedding_pipeline = pipeline(
                 "feature-extraction",
@@ -83,6 +94,8 @@ def analyze_customer_feedback():
             embeddings = embedding_pipeline(comment)
             print(f"Size of comment: {getsizeof(comment.encode('utf-8'))} bytes")
             print(f"Size of embeddings: {deep_getsizeof(embeddings, set())} bytes")
+
+            context["my_mapping_variable"] = f"{comment}"
 
             # NEW in Airflow 2.9: Use Object Storage custom XCom backend to send
             # large XCom values to an object storage container

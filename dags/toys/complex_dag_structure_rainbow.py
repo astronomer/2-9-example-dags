@@ -29,6 +29,7 @@ from include.rainbow_operators.rainbow_operators import (
     start_date=datetime(2024, 1, 1),
     schedule=[Dataset("s3://in_sales_data"), Dataset("az://in_internal_api")],
     catchup=False,
+    doc_md=__doc__,
     dag_display_name="🌈",  # NEW in Airflow 2.9: Define a display name that can include non-ascii characters
     # (the dag_id only allows alphanumeric characters, dashes, dots and underscores)
     tags=["toy", "UI DAG"],

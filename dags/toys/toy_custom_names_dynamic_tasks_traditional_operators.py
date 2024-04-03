@@ -17,7 +17,8 @@ import requests
     schedule=None,
     catchup=False,
     doc_md=__doc__,
-    tags=["Dynamic Task Mapping", "2-9", "toy"],
+    dag_display_name="Query Fruityvice API for fruit info (Früchte DAG)",
+    tags=["Dynamic Task Mapping", "toy"],
 )
 def toy_custom_names_dynamic_tasks_traditional_operators():
     @task
@@ -40,7 +41,8 @@ def toy_custom_names_dynamic_tasks_traditional_operators():
     map_fruits = BashOperator.partial(
         task_id="map_fruits",
         bash_command='echo "$name sugar content: $sugar"',
-        map_index_template="{{ task.env['name'] }} - {{ task.env['sugar'] }}g sugar",  # retrieving the fruit name from the input dictionary
+        map_index_template="{{ task.env['name'] }} - {{ task.env['sugar'] }}g sugar",
+        # retrieving the fruit name and sugar from the input dictionary
     ).expand(env=get_fruits_obj)
 
     chain(get_fruits_obj, map_fruits)

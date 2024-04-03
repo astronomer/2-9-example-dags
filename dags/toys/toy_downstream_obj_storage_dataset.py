@@ -19,7 +19,7 @@ MY_CONN_ID = None  # connecting to the local file system does not require a conn
     schedule=[MY_DATASET],
     catchup=False,
     doc_md=__doc__,
-    tags=["ObjectStorage", "2-9", "toy", "Dataset"],
+    tags=["ObjectStorage", "toy", "Dataset"],
 )
 def toy_downstream_obj_storage_dataset():
 

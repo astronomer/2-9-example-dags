@@ -11,7 +11,7 @@ from include.toy_helpers.custom_operators import MyBasicMathOperator
     schedule=None,
     catchup=False,
     doc_md=__doc__,
-    tags=["xcom", "2-9", "toy"],
+    tags=["xcom", "toy"],
 )
 def toy_custom_operator_push_multiple_xcom():
 
@@ -27,7 +27,7 @@ def toy_custom_operator_push_multiple_xcom():
         first_number=23,
         second_number=19,
         operation="+",
-        multiple_outputs=True,
+        multiple_outputs=True,  # NEW in Airflow 2.9: set multiple_outputs on the BaseOperator
     )
 
 

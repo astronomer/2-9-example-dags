@@ -10,13 +10,12 @@ from airflow.decorators import dag, task
     schedule=None,
     catchup=False,
     doc_md=__doc__,
-    tags=["@task.bash", "2-9", "toy"],
+    tags=["@task.bash", "toy"],
 )
 def toy_taskflow_bash():
 
     @task
     def upstream_task():
-        # create a nested dictionary with names and number of dogs
         dog_owner_data = {
             "names": ["Trevor", "Grant", "Marcy", "Carly", "Philip"],
             "dogs": [1, 2, 2, 0, 4],
@@ -24,6 +23,7 @@ def toy_taskflow_bash():
 
         return dog_owner_data
 
+    # NEW in Airflow 2.9: task.bash, the string that is returned will be executed as a bash command
     @task.bash
     def bash_task(dog_owner_data):
         names_of_dogless_people = []

@@ -11,7 +11,7 @@ from airflow.datasets import Dataset
     schedule=None,
     catchup=False,
     doc_md=__doc__,
-    tags=["Dataset", "2-9", "toy", "Conditional Dataset Scheduling"],
+    tags=["Dataset", "toy", "Conditional Dataset Scheduling"],
 )
 def upstream4():
     @task(outlets=[Dataset("dataset4")])
