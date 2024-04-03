@@ -34,7 +34,7 @@ slack_notifier_instantiated = SlackNotifier(
     schedule=None,
     catchup=False,
     doc_md=__doc__,
-    tags=["@task.bash", "toy"],
+    tags=["on_skipped_callback"],
 )
 def toy_on_skipped_callback():
 

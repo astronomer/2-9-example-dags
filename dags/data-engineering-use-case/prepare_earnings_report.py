@@ -67,9 +67,7 @@ def prepare_earnings_report():
         r = set_up_report_platform()
         return r
 
-    @task(
-        retries=0,
-    )
+    @task(retries=0)
     def get_key_metrics(**context):
         key_metric = context["params"]["toy_to_report"]
         simulate_metric_fetch_failure = context["params"][
