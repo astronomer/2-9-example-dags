@@ -36,10 +36,11 @@ def toy_custom_names_dynamic_tasks_traditional_operators():
 
     get_fruits_obj = get_fruits()
 
+    # NEW in Airflow 2.9: Define custom names for the map index
     map_fruits = BashOperator.partial(
         task_id="map_fruits",
         bash_command='echo "$name sugar content: $sugar"',
-        map_index_template="""{{ task.env['name'] }}""",
+        map_index_template="This task is about {{ task.env['name'] }}",  # retrieving the fruit name from the input dictionary
     ).expand(env=get_fruits_obj)
 
     chain(get_fruits_obj, map_fruits)

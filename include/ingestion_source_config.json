@@ -14,10 +14,6 @@
             "schedule": "@daily",
             "catchup": false,
             "tags": [
-                "sales_reports",
-                "ETL",
-                "Dynamic DAG",
-                "Object Storage",
                 "Dynamic Task Mapping",
                 "use-case"
             ],
@@ -39,10 +35,6 @@
             "schedule": "@daily",
             "catchup": false,
             "tags": [
-                "customer_feedback",
-                "ETL",
-                "Dynamic DAG",
-                "Object Storage",
                 "Dynamic Task Mapping",
                 "use-case"
             ],
@@ -64,10 +56,6 @@
             "schedule": "@daily",
             "catchup": false,
             "tags": [
-                "customer_data",
-                "ETL",
-                "Dynamic DAG",
-                "Object Storage",
                 "Dynamic Task Mapping",
                 "use-case"
             ],

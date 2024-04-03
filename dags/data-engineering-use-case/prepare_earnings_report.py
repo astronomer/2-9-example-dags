@@ -27,15 +27,9 @@ SNOWFLAKE_CONN_ID = "snowflake_de_team"
     schedule=DatasetOrTimeSchedule(
         timetable=CronTriggerTimetable("0 * * * *", timezone="UTC"),
         datasets=[Dataset("snowflake://sales_reports_table")],
-    ),
+    ),  # NEW in Airflow 2.9: Schedule on time and datasets
     catchup=False,
-    tags=[
-        "report",
-        "Airflow params (manual run)",
-        "Setup/Teardown",
-        "DatasetOrTimeSchedule",
-        "use-case"
-    ],
+    tags=["DatasetOrTimeSchedule", "use-case"],
     default_args={"owner": "Cerberus", "retries": 3, "retry_delay": 5},
     description="Load data from S3 to Snowflake",
     doc_md=__doc__,

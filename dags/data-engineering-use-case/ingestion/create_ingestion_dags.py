@@ -72,7 +72,7 @@ def create_ingest_dags(
 
         @task(
             task_id=f"extract_{source_name}",
-            map_index_template="""{{ my_mapping_variable }}""",
+            map_index_template="{{ my_mapping_variable }}",
         )
         def extract(
             base_path_intermediate: ObjectStoragePath,
@@ -85,9 +85,9 @@ def create_ingest_dags(
 
             file_name = source_file.name
 
-            # NEW in Airflow 2.9: name dynamically mapped task instances
+            # NEW in Airflow 2.9: custom index for dynamically mapped task instances
             context = get_current_context()
-            context["my_mapping_variable"] = file_name
+            context["my_mapping_variable"] = f"Source file: {file_name}"
 
             print(f"Extracting {source_file} and copy to {base_path_intermediate}.")
 
@@ -102,7 +102,7 @@ def create_ingest_dags(
 
         @task(
             task_id=f"verify_checksum_{source_name}",
-            map_index_template="""{{ my_mapping_variable }}""",
+            map_index_template="{{ my_mapping_variable }}",
         )
         def check_checksum(
             file: ObjectStoragePath,
@@ -111,9 +111,9 @@ def create_ingest_dags(
 
             file_name = file.name
 
-            # NEW in Airflow 2.9: name dynamically mapped task instances
+            # NEW in Airflow 2.9: custom index for dynamically mapped task instances
             context = get_current_context()
-            context["my_mapping_variable"] = file_name
+            context["my_mapping_variable"] = f"Source file: {file_name}"
             check_sum_file = file.checksum()
 
             result = verify_checksum(check_sum_file)
@@ -122,7 +122,7 @@ def create_ingest_dags(
 
         @task(
             task_id=f"load_{source_name}",
-            map_index_template="""{{ my_mapping_variable }}""",
+            map_index_template="{{ my_mapping_variable }}",
         )
         def load(
             source_file: ObjectStoragePath,
@@ -134,9 +134,9 @@ def create_ingest_dags(
 
             file_name = source_file.name
 
-            # NEW in Airflow 2.9: name dynamically mapped task instances
+            # NEW in Airflow 2.9: custom index for dynamically mapped task instances
             context = get_current_context()
-            context["my_mapping_variable"] = file_name
+            context["my_mapping_variable"] = f"Source file: {file_name}"
 
             print(f"Extracting {source_file} and writing it to {base_path_load}.")
 

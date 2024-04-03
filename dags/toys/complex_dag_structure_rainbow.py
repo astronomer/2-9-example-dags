@@ -1,3 +1,10 @@
+"""
+## Example DAG with a complex structure
+
+This DAG doesn't really do anything other than attempting to look pretty.
+Used to show UI features.
+"""
+
 from airflow.decorators import dag, task_group, task
 from airflow.operators.empty import EmptyOperator
 from airflow.models.baseoperator import chain, chain_linear
@@ -14,7 +21,7 @@ from include.rainbow_operators.rainbow_operators import (
     PublishReportOperator,
     SpinUpGPUOperator,
     TrainProprietaryLLMOperator,
-    TearDownGPUOperator
+    TearDownGPUOperator,
 )
 
 
@@ -22,15 +29,20 @@ from include.rainbow_operators.rainbow_operators import (
     start_date=datetime(2024, 1, 1),
     schedule=[Dataset("s3://in_sales_data"), Dataset("az://in_internal_api")],
     catchup=False,
-    tags=["toy", "UI DAG"]
+    dag_display_name="🌈",  # NEW in Airflow 2.9: Define a display name that can include non-ascii characters
+    # (the dag_id only allows alphanumeric characters, dashes, dots and underscores)
+    tags=["toy", "UI DAG"],
 )
 def complex_dag_structure_rainbow():
 
     start = EmptyOperator(task_id="start")
 
-    sales_data_extract = ExtractFromObjectStorageOperator.partial(task_id="sales_data_extract").expand(my_param=[1, 2, 3, 4])
-    internal_api_extract = ExtractFromObjectStorageOperator.partial(task_id="internal_api_extract").expand(my_param=[1, 2, 3, 4])
-
+    sales_data_extract = ExtractFromObjectStorageOperator.partial(
+        task_id="sales_data_extract"
+    ).expand(my_param=[1, 2, 3, 4])
+    internal_api_extract = ExtractFromObjectStorageOperator.partial(
+        task_id="internal_api_extract"
+    ).expand(my_param=[1, 2, 3, 4])
 
     @task.branch
     def determine_load_type():

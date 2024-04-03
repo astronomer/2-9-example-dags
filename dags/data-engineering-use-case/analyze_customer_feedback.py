@@ -24,8 +24,12 @@ SNOWFLAKE_CONN_ID = "snowflake_de_team"
     start_date=datetime(2024, 1, 1),
     schedule=[Dataset("snowflake://customer_feedback_table")],
     catchup=False,
-    max_consecutive_failed_dag_runs=5,
-    tags=["ML", "CS", "Dynamic Task Group Mapping", "DAG Docs", "use-case"],
+    max_consecutive_failed_dag_runs=5,  # NEW in Airflow 2.9: Pause the DAG after x failed runs
+    tags=[
+        "Max Consecutive Failed Runs",
+        "Object Store custom XCom backend",
+        "use-case",
+    ],
     default_args={"owner": "Pakkun", "retries": 3, "retry_delay": 5},
     description="Analyze customer feedback",
     doc_md=__doc__,
@@ -80,6 +84,8 @@ def analyze_customer_feedback():
             print(f"Size of comment: {getsizeof(comment.encode('utf-8'))} bytes")
             print(f"Size of embeddings: {deep_getsizeof(embeddings, set())} bytes")
 
+            # NEW in Airflow 2.9: Use Object Storage custom XCom backend to send
+            # large XCom values to an object storage container
             return {"embeddings": embeddings, "comment": comment}
 
         processed_feedback = process_feedback(feedback)

@@ -8,6 +8,7 @@ with the dynamically mapped task instances being named after the fruit.
 
 from airflow.decorators import dag, task
 import requests
+from include.helpers import get_display_fruit
 
 
 @dag(
@@ -15,7 +16,7 @@ import requests
     schedule=None,
     catchup=False,
     doc_md=__doc__,
-    tags=["Dynamic Task Mapping", "2-9", "toy"],
+    tags=["Dynamic Task Mapping", "toy"],
 )
 def toy_custom_names_dynamic_tasks_taskflow():
     @task
@@ -24,14 +25,22 @@ def toy_custom_names_dynamic_tasks_taskflow():
         r = requests.get(f"https://www.fruityvice.com/api/fruit/all").json()
         return r
 
+    # NEW in Airflow 2.9: Define custom names for the map index
     @task(map_index_template="{{ my_mapping_variable }}")
     def map_fruits(fruit_info: dict):
         from airflow.operators.python import get_current_context
 
         fruit_name = fruit_info["name"]
+        sugar_content = fruit_info["nutritions"]["sugar"]
+        display_fruit = get_display_fruit(fruit_name)
+
         context = get_current_context()
-        context["my_mapping_variable"] = fruit_name
-        print(f"{fruit_name} sugar content: {fruit_info['nutritions']['sugar']}")
+        # The map index is added after the task has run, so it can include any computed values
+        # from within the task
+        context["my_mapping_variable"] = (
+            f"{display_fruit} {fruit_name} - {sugar_content}g sugar."
+        )
+        print(f"{fruit_name} sugar content: {sugar_content}")
 
     map_fruits.expand(fruit_info=get_fruits())
 

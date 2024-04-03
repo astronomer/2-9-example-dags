@@ -50,7 +50,7 @@ SNOWFLAKE_CONN_ID = "snowflake_de_team"
     start_date=datetime(2024, 1, 1),
     schedule=reduce(
         lambda x, y: x | y, ingestion_datasets
-    ),  # NEW in Airflow 2.9: Schedule on any of the datasets
+    ),  # NEW in Airflow 2.9: Schedule on logical expressions involving datasets
     catchup=False,
     tags=["Conditional Dataset Scheduling", "use-case"],
     default_args={"owner": "Piglet", "retries": 3, "retry_delay": 5},

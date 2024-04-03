@@ -12,12 +12,14 @@ from airflow.timetables.trigger import CronTriggerTimetable
 @dag(
     start_date=datetime(2024, 3, 1),
     schedule=DatasetOrTimeSchedule(
-        timetable=CronTriggerTimetable("*/2 * * * *", timezone="UTC"),
+        timetable=CronTriggerTimetable("0 * * * *", timezone="UTC"),
         datasets=(Dataset("dataset3") | Dataset("dataset4")),
-    ),  # Use () instead of [] to be able to use conditional dataset scheduling!
+    ),  # Runs every hour and when either of the datasets are updated
+    # NEW in Airflow 2.9: Schedule a DAG both on time and conditional datasets
+    # Use () instead of [] to be able to use conditional dataset scheduling!
     catchup=False,
     doc_md=__doc__,
-    tags=["Dataset", "2-9", "toy", "Conditional Dataset Scheduling"],
+    tags=["toy", "Conditional Dataset Scheduling"],
 )
 def toy_downstream3_dataset_and_time_schedule():
     @task

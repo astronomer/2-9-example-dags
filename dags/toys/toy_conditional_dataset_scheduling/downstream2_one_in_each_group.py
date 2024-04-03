@@ -12,10 +12,12 @@ from pendulum import datetime
     schedule=(
         (Dataset("dataset1") | Dataset("dataset2"))
         & (Dataset("dataset3") | Dataset("dataset4"))
-    ),  # Use () instead of [] to be able to use conditional dataset scheduling!
+    ),  # Runs when one dataset in each group is updated
+    # NEW in Airflow 2.9: Use conditional logic to schedule a DAG based on datasets
+    # Use () instead of [] to be able to use conditional dataset scheduling!
     catchup=False,
     doc_md=__doc__,
-    tags=["Dataset", "2-9", "toy", "Conditional Dataset Scheduling"],
+    tags=["toy", "Conditional Dataset Scheduling"],
 )
 def downstream2_one_in_each_group():
     @task

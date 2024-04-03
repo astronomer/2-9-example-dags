@@ -36,3 +36,51 @@ def deep_getsizeof(o, ids):
         return r + sum(deep_getsizeof(i, ids) for i in o)
 
     return r
+
+
+def get_display_fruit(fruit_name):
+
+    if fruit_name == "Strawberry":
+        display_fruit = "🍓"
+    elif fruit_name == "Banana":
+        display_fruit = "🍌"
+    elif fruit_name == "Tomato":
+        display_fruit = "🍅"
+    elif fruit_name == "Pear":
+        display_fruit = "🍐"
+    elif fruit_name == "Kiwi":
+        display_fruit = "🥝"
+    elif fruit_name == "Pineapple":
+        display_fruit = "🍍"
+    elif fruit_name == "Orange":
+        display_fruit = "🍊"
+    elif fruit_name == "GreenApple":
+        display_fruit = "🍏"
+    elif fruit_name == "Watermelon":
+        display_fruit = "🍉"
+    elif fruit_name == "Lemon":
+        display_fruit = "🍋"
+    elif fruit_name == "Mango":
+        display_fruit = "🥭"
+    elif fruit_name == "Blueberry":
+        display_fruit = "🫐"
+    elif fruit_name == "Apple":
+        display_fruit = "🍎"
+    elif fruit_name == "Melon":
+        display_fruit = "🍈"
+    elif fruit_name == "Grape":
+        display_fruit = "🍇"
+    elif fruit_name == "Avocado":
+        display_fruit = "🥑"
+    elif fruit_name == "Cherry":
+        display_fruit = "🍒"
+    elif fruit_name == "Peach":
+        display_fruit = "🍑"
+    elif fruit_name == "Hazelnut":
+        display_fruit = "🌰"
+    elif fruit_name == "Pumpkin":
+        display_fruit = "🎃"
+    else:
+        display_fruit = ""
+
+    return display_fruit
