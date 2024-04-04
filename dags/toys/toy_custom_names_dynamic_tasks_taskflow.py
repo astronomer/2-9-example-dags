@@ -40,6 +40,7 @@ def toy_custom_names_dynamic_tasks_taskflow():
         context["my_mapping_variable"] = (
             f"{display_fruit} {fruit_name} - {sugar_content}g sugar."
         )
+        
         print(f"{fruit_name} sugar content: {sugar_content}")
 
     map_fruits.expand(fruit_info=get_fruits())
