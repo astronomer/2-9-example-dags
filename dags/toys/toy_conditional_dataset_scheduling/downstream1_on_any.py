@@ -27,6 +27,8 @@ def downstream1_on_any():
         """
         Print Hello
         """
+        import time 
+        time.sleep(10)
         print("Hello")
 
     say_hello()

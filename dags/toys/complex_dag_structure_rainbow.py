@@ -30,16 +30,17 @@ from include.rainbow_operators.rainbow_operators import (
     schedule=[Dataset("s3://in_sales_data"), Dataset("az://in_internal_api")],
     catchup=False,
     doc_md=__doc__,
-    dag_display_name="🌈",  # NEW in Airflow 2.9: Define a display name that can include non-ascii characters
+    dag_display_name="Rägeboge DAG 🌈",  # NEW in Airflow 2.9: Define a display name that can include non-ascii characters
     # (the dag_id only allows alphanumeric characters, dashes, dots and underscores)
     tags=["toy", "UI DAG"],
 )
 def complex_dag_structure_rainbow():
 
-    start = EmptyOperator(task_id="start")
+    start = EmptyOperator(task_id="start", task_display_name="🏁")
 
     sales_data_extract = ExtractFromObjectStorageOperator.partial(
-        task_id="sales_data_extract"
+        task_id="sales_data_extract", 
+        task_display_name="📦 für Sales!"
     ).expand(my_param=[1, 2, 3, 4])
     internal_api_extract = ExtractFromObjectStorageOperator.partial(
         task_id="internal_api_extract"
@@ -96,7 +97,7 @@ def complex_dag_structure_rainbow():
 
     mlops_obj = mlops()
 
-    end = EmptyOperator(task_id="end")
+    end = EmptyOperator(task_id="end", task_display_name="✅")
 
     chain(
         start,

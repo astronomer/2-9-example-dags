@@ -27,6 +27,8 @@ def toy_downstream3_dataset_and_time_schedule():
         """
         Print Hello
         """
+        import time 
+        time.sleep(10)
         print("Hello")
 
     say_hello()

@@ -25,6 +25,8 @@ def downstream2_one_in_each_group():
         """
         Print Hello
         """
+        import time 
+        time.sleep(10)
         print("Hello")
 
     say_hello()

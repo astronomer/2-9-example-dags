@@ -14,7 +14,7 @@ from airflow.models.baseoperator import chain
     schedule=None,
     catchup=False,
     doc_md=__doc__,
-    tags=["xcom", "toy"],
+    tags=["Object Store custom XCom backend", "toy"],
 )
 def toy_xcom_big_vs_small():
     @task
@@ -36,7 +36,9 @@ def toy_xcom_big_vs_small():
         small_obj = context["ti"].xcom_pull(task_ids="push_objects", key="small_obj")
         big_obj = context["ti"].xcom_pull(task_ids="push_objects", key="big_obj")
 
+        print(small_obj)
         print(f"Size of small object: {small_obj.__sizeof__()}")
+        print(big_obj)
         print(f"Size of big object: {big_obj.__sizeof__()}")
 
     chain(push_objects(), pull_objects())

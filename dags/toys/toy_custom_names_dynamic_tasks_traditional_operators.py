@@ -17,7 +17,6 @@ import requests
     schedule=None,
     catchup=False,
     doc_md=__doc__,
-    dag_display_name="Query Fruityvice API for fruit info (Früchte DAG)",
     tags=["Dynamic Task Mapping", "toy"],
 )
 def toy_custom_names_dynamic_tasks_traditional_operators():
