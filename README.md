@@ -64,7 +64,7 @@ The DAGs in the [toy_conditional_dataset_scheduling](dags/toys/toy_conditional_d
 ### Other
 
 - [`complex_dag_structure_rainbow`](dags/toys/complex_dag_structure_rainbow.py): DAG to see UI features with a complex structure. Uses custom operators from [include/rainbow_operators/rainbow_operators.py](include/rainbow_operators/rainbow_operators.py).
-- [`toy_auto_pause`]: DAG that shows how to use the `max_consecutive_failed_dag_runs` parameter.
+- [`toy_auto_pause`](dags/toys/toy_auto_pause.py): DAG that shows how to use the `max_consecutive_failed_dag_runs` parameter.
 - [`toy_custom_names_dynamic_tasks_taskflow`](dags/toys/toy_custom_names_dynamic_tasks_taskflow.py): DAG that shows how to use custom names for dynamic tasks map indexes with `@task`.
 - [`toy_custom_names_dynamic_tasks_traditional_operators`](dags/toys/toy_custom_names_dynamic_tasks_traditional_operators.py): DAG that shows how to use custom names for dynamic tasks map indexes with traditional operators.
 - [`toy_custom_operator_push_multiple_xcom`](dags/toys/toy_custom_operator_push_multiple_xcom.py): DAG that shows how to push multiple XComs from any operator. Uses a custom operator from [include/toy_helpers/custom_operators.py](include/toy_helpers/custom_operators.py).
