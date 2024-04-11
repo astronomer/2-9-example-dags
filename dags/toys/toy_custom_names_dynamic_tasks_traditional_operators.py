@@ -10,11 +10,11 @@ from airflow.decorators import dag, task
 from airflow.models.baseoperator import chain
 from airflow.operators.bash import BashOperator
 import requests
-
+from pendulum import datetime
 
 @dag(
-    start_date=None,
-    schedule=None,
+    start_date=datetime(2024, 1, 1),
+    schedule="@daily",
     catchup=False,
     doc_md=__doc__,
     tags=["Dynamic Task Mapping", "toy"],

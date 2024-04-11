@@ -4,13 +4,9 @@ from pendulum import datetime
 
 @dag(
     start_date=datetime(2024, 1, 1),
-    schedule="* * * * *",
+    schedule="0 * * * *",
     catchup=False,
     max_consecutive_failed_dag_runs=5,
-    tags=[
-        "Max Consecutive Failed Runs",
-        "toy",
-    ],
     doc_md=__doc__,
 )
 def toy_auto_pause():

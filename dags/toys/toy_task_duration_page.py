@@ -7,13 +7,14 @@ Use this DAG to showcase the new task duration page in the UI.
 from airflow.decorators import dag, task
 import time
 import random
+from pendulum import datetime
 
 random.seed(42)
 
 
 @dag(
-    start_date=None,
-    schedule=None,
+    start_date=datetime(2024, 1, 1),
+    schedule="@daily",
     catchup=False,
     doc_md=__doc__,
     tags=["UI", "toy"],
