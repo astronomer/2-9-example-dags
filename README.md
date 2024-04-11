@@ -79,8 +79,8 @@ The DAGs in the [toy_conditional_dataset_scheduling](dags/toys/toy_conditional_d
 
 - [Datasets guide](https://docs.astronomer.io/learn/airflow-datasets).
 - [Dynamic Task Mapping guide](https://docs.astronomer.io/learn/dynamic-tasks).
-- [Options for custom XCom backends in Airflow guide](https://docs.astronomer.io/learnairflow-custom-xcom-backends).
-- [Set up a custom XCom backend using Object Storage tutorial](https://docs.astronomer.io/learn/xcom-backend-tutorial).
+- Options for custom XCom backends in Airflow guide: Coming soon!
+- Set up a custom XCom backend using Object Storage tutorial: Coming soon!
 - [Object Storage Basic tutorial](https://docs.astronomer.io/learn/airflow-object-storage-tutorial).
 - [Object Storage OSS Docs tutorial](https://airflow.apache.org/docs/apache-airflow/stable/tutorial/objectstorage.html#object-storage).
 - [Object Storage OSS Docs guide](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html#object-storage).

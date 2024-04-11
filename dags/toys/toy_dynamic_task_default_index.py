@@ -30,8 +30,16 @@ def toy_dynamic_task_default_index():
 
         fruit_name = fruit_info["name"]
         sugar_content = fruit_info["nutritions"]["sugar"]
+        calories = fruit_info["nutritions"]["calories"]
+        carbs = fruit_info["nutritions"]["carbohydrates"]
+        protein = fruit_info["nutritions"]["protein"]
+        fat = fruit_info["nutritions"]["fat"]
 
         print(f"{fruit_name} sugar content: {sugar_content}")
+        print(f"{fruit_name} calories: {calories}")
+        print(f"{fruit_name} carbs: {carbs}")
+        print(f"{fruit_name} protein: {protein}")
+        print(f"{fruit_name} fat: {fat}")
 
     map_fruits.expand(fruit_info=get_fruits())
 

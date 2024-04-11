@@ -33,21 +33,31 @@ def toy_custom_names_dynamic_tasks_taskflow():
     # NEW in Airflow 2.9: Define custom names for the map index
     @task(map_index_template="{{ my_mapping_variable }}")
     def map_fruits(fruit_info: dict):
-        from airflow.operators.python import get_current_context
 
         fruit_name = fruit_info["name"]
         sugar_content = fruit_info["nutritions"]["sugar"]
+        calories = fruit_info["nutritions"]["calories"]
+        carbs = fruit_info["nutritions"]["carbohydrates"]
+        protein = fruit_info["nutritions"]["protein"]
+        fat = fruit_info["nutritions"]["fat"]
+
+        print(f"{fruit_name} sugar content: {sugar_content}")
+        print(f"{fruit_name} calories: {calories}")
+        print(f"{fruit_name} carbs: {carbs}")
+        print(f"{fruit_name} protein: {protein}")
+        print(f"{fruit_name} fat: {fat}")
+
         display_fruit = get_display_fruit(fruit_name)
+
+        # create custom map index
+        from airflow.operators.python import get_current_context
 
         context = get_current_context()
         # The map index is added after the task has run, so it can include any computed values
         # from within the task
         context["my_mapping_variable"] = (
-            f"{fruit_name} - {sugar_content}g sugar."
+            f"{display_fruit} {fruit_name} - {sugar_content}g sugar."
         )
-
-        print(f"{fruit_name} sugar content: {sugar_content}")
-
 
     map_fruits.expand(fruit_info=get_fruits())
 

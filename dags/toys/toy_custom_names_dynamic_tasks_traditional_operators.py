@@ -12,6 +12,7 @@ from airflow.operators.bash import BashOperator
 import requests
 from pendulum import datetime
 
+
 @dag(
     start_date=datetime(2024, 1, 1),
     schedule="@daily",
@@ -39,7 +40,7 @@ def toy_custom_names_dynamic_tasks_traditional_operators():
     # NEW in Airflow 2.9: Define custom names for the map index
     map_fruits = BashOperator.partial(
         task_id="map_fruits",
-        bash_command='echo "$name sugar content: $sugar"',
+        bash_command='echo "$name sugar content: $sugar" && echo "$name calories: $calories" && echo "$name carbs: $carbohydrates" && echo "$name protein: $protein" && echo "$name fat: $fat"',
         map_index_template="{{ task.env['name'] }} - {{ task.env['sugar'] }}g sugar",
         # retrieving the fruit name and sugar from the input dictionary
     ).expand(env=get_fruits_obj)

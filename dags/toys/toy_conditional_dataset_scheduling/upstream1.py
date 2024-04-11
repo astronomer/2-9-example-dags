@@ -20,6 +20,9 @@ def upstream1():
         """
         Update the dataset
         """
+        import time
+
+        time.sleep(30)
         print("Updating dataset 1")
 
     update_dataset_1()
