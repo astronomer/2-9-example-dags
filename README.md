@@ -1,4 +1,4 @@
-# Example DAGs for Apache Airflow 2.9
+# Data Science DAGs with Apache Airflow 2.9
 
 This repository contains example DAGs showing features released in Apache Airflow 2.9. 
 
