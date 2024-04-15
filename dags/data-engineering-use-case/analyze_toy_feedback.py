@@ -42,7 +42,7 @@ def analyze_customer_feedback():
     )
 
     @task_group
-    def get_sentiment(feedback):
+    def get_toy_sentiment(feedback):
         # NEW in Airflow 2.9: Define custom names for the map index
         @task(map_index_template="{{ my_mapping_variable }}")
         def process_feedback(feedback):
@@ -57,7 +57,7 @@ def analyze_customer_feedback():
 
         @task(queue="ml-queue", map_index_template="{{ my_mapping_variable }}")
         # NEW in Airflow 2.9: Define custom names for the map index
-        def analyze_sentiment(processed_text):
+        def analyze_toy_sentiment(processed_text):
             from airflow.operators.python import get_current_context
             from transformers import pipeline
 
