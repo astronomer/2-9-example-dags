@@ -32,7 +32,7 @@ SNOWFLAKE_CONN_ID = "snowflake_de_team"
     description="Analyze customer feedback",
     doc_md=__doc__,
 )
-def analyze_customer_feedback():
+def analyze_toy_feedback():
     gather_feedback = SnowflakeOperator(
         task_id=f"gather_feedback",
         snowflake_conn_id=SNOWFLAKE_CONN_ID,
@@ -42,7 +42,7 @@ def analyze_customer_feedback():
     )
 
     @task_group
-    def get_sentiment(feedback):
+    def get_toy_sentiment(feedback):
         # NEW in Airflow 2.9: Define custom names for the map index
         @task(map_index_template="{{ my_mapping_variable }}")
         def process_feedback(feedback):
