@@ -124,10 +124,10 @@ def analyze_toy_feedback():
         )
         return positive_count, negative_count, neutral_count
 
-    sentiments = get_sentiment.expand(feedback=gather_feedback.output)
+    sentiments = get_toy_sentiment.expand(feedback=gather_feedback.output)
     report = report_on_results(sentiments)
 
     chain(sentiments, report)
 
 
-analyze_customer_feedback()
+analyze_toy_feedback()
