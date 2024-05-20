@@ -1,5 +1,5 @@
 """
-### Toy DAG to show how to use custom names for dynamic tasks - TaskFlowAPI
+### Toy DAG to show how to use custom names for dynamic tasks - TaskFlow API
 
 This DAG queries the fruityvice API for information about all fruits. 
 It then creates a dynamically mapped task printing the sugar content of each fruit, 
