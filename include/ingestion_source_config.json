@@ -18,7 +18,7 @@
                 "use-case"
             ],
             "dag_owner": "Avery",
-            "task_retries": 3, 
+            "task_retries": 2, 
             "table_creation_sql": "CREATE TABLE IF NOT EXISTS sales_reports_table (Date TIMESTAMP_NTZ, PurchaseID VARCHAR(36), ProductName VARCHAR(255), QuantitySold INTEGER, Revenue FLOAT);"
         },
         {
